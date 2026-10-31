@@ -36,9 +36,9 @@ Use any of the following from the repo root:
    - Open the HTML files directly in a browser, or
    - Use the Live Server extension in VS Code to serve the folder.
 
-## Suggested walkthrough (5 minutes)
+## Suggested walkthrough
 
-### 1) Keyboard only (about 1.5 minutes)
+### 1) Keyboard only
 
 Open the bad version first:
 
@@ -56,7 +56,7 @@ Then open the good version:
 - The modal opens with a clear accessible dialog pattern and focus moves into the dialog.
 - Press `Tab` and `Shift+Tab` to confirm the focus stays inside the dialog until it closes.
 
-### 2) Browser accessibility tree (about 1.5 minutes)
+### 2) Browser accessibility tree
 
 Open Chrome DevTools and inspect the page with the Accessibility panel:
 
@@ -71,7 +71,7 @@ Look for examples such as:
 - input state (`disabled`, `checked`, etc.)
 - dialog name and modal state (`aria-modal="true"`)
 
-### 3) Lighthouse and axe (about 1 minute)
+### 3) Lighthouse and axe
 
 Run Lighthouse and axe on both pages.
 
@@ -98,7 +98,3 @@ This demo focuses on the kinds of failures that often map to WCAG 2.1 success cr
 - 4.1.2 Name, Role, Value
 - 2.4.3 Focus Order
 - 2.4.11 Focus Not Obscured
-
-## Teaching tip
-
-Keep the visual design almost identical in both versions so the audience can see that the accessibility differences are not obvious to a sighted mouse user—but they are highly visible to keyboard and assistive-tech users.
