@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessibility Demo — Bad</title>
+    <style>
+      :root {
+        --bg: #f4f0ff;
+        --panel: #ffffff;
+        --panel-2: #f8f5ff;
+        --primary: #5e3df6;
+        --primary-dark: #3d2bb3;
+        --text: #1d2433;
+        --muted: #5e6677;
+        --line: #e2dff7;
+        --shadow: rgba(33, 23, 71, 0.12);
+        --danger: #d94c4c;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        min-height: 100vh;
+      }
+
+      a, button, input, select, textarea {
+        font: inherit;
+        outline: none;
+      }
+
+      :focus {
+        outline: none;
+      }
+
+      .frame {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px 48px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px 20px;
+        box-shadow: 0 12px 28px rgba(27, 32, 49, 0.05);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--primary), #8d6ef9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .main-nav {
+        display: flex;
+        gap: 28px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav-item {
+        cursor: pointer;
+        padding: 8px 10px;
+        border-radius: 8px;
+      }
+
+      .nav-item:hover {
+        background: var(--panel-2);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .chip.primary {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr 0.95fr;
+        gap: 28px;
+        align-items: center;
+        padding-top: 42px;
+      }
+
+      .intro {
+        padding: 8px 0;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        background: #efe9ff;
+        color: var(--primary-dark);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        padding: 8px 10px;
+        border-radius: 999px;
+      }
+
+      h1 {
+        margin: 18px 0 14px;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+        line-height: 1.06;
+        letter-spacing: -0.05em;
+      }
+
+      .intro p {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--muted);
+        margin: 0 0 18px;
+        max-width: 520px;
+      }
+
+      .bullet-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 22px;
+        color: var(--text);
+        display: grid;
+        gap: 10px;
+      }
+
+      .bullet-list li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+      }
+
+      .bullet-list li::before {
+        content: "✓";
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #e8f7ed;
+        color: #1e8d4e;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+      }
+
+      .mini-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 12px 14px;
+        box-shadow: 0 12px 28px rgba(35, 42, 62, 0.04);
+      }
+
+      .mini-note strong {
+        font-size: 1.1rem;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        box-shadow: 0 16px 42px rgba(35, 42, 62, 0.08);
+        overflow: hidden;
+      }
+
+      .signup-card {
+        padding: 24px;
+      }
+
+      .signup-card h2 {
+        margin: 0 0 16px;
+        font-size: 1.7rem;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fdfcff;
+        padding: 14px 16px;
+        color: var(--text);
+      }
+
+      .field input::placeholder {
+        color: #7d8597;
+      }
+
+      .field input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(94, 61, 246, 0.12);
+      }
+
+      .button-block {
+        width: 100%;
+        border: 0;
+        background: var(--primary);
+        color: white;
+        border-radius: 12px;
+        padding: 15px 18px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 6px;
+      }
+
+      .button-block.secondary {
+        background: #f1ebff;
+        color: var(--primary-dark);
+      }
+
+      .booking-card {
+        width: 100%;
+        background: linear-gradient(180deg, #fff, #faf8ff);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 16px 42px rgba(35, 42, 62, 0.08);
+      }
+
+      .booking-card img {
+        width: 100%;
+        display: block;
+        height: 320px;
+        object-fit: cover;
+      }
+
+      .booking-copy {
+        padding: 18px 18px 20px;
+      }
+
+      .booking-copy h3 {
+        margin: 0 0 8px;
+        font-size: 1.15rem;
+      }
+
+      .booking-copy p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(16, 20, 31, 0.44);
+        padding: 20px;
+      }
+
+      .modal-backdrop.open {
+        display: flex;
+      }
+
+      .modal {
+        width: min(100%, 440px);
+        background: white;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        padding: 18px 18px 14px;
+        box-shadow: 0 26px 50px rgba(25, 28, 38, 0.18);
+      }
+
+      .modal-close {
+        font-size: 2rem;
+        line-height: 1;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        cursor: pointer;
+        padding: 0;
+        margin-left: auto;
+        display: block;
+      }
+
+      .modal h3 {
+        margin: 10px 0 10px;
+        font-size: 1.55rem;
+      }
+
+      .modal p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .ghost-btn {
+        background: #efeaff;
+        color: var(--primary-dark);
+        border: 0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .primary-btn {
+        background: var(--primary);
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .main-nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <header class="topbar" aria-label="Header">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <span>Skyline</span>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <div class="nav-item">Features</div>
+          <div class="nav-item">Pricing</div>
+          <div class="nav-item">Resources</div>
+        </nav>
+
+        <div class="nav-actions">
+          <div class="chip">Log in</div>
+          <div class="chip primary" id="open-modal">Book demo</div>
+        </div>
+      </header>
+
+      <main class="hero">
+        <section class="intro">
+          <span class="eyebrow">Team productivity</span>
+          <h1>Build your next launch in one place.</h1>
+          <p>Keep plans, assets, and stakeholder feedback aligned without the spreadsheet chaos.</p>
+
+          <ul class="bullet-list">
+            <li>Shared launch timeline</li>
+            <li>Real-time campaign notes</li>
+            <li>Fewer handoff mistakes</li>
+          </ul>
+
+          <div class="mini-note">
+            <strong>2.3x</strong>
+            <span>faster campaign coordination</span>
+          </div>
+        </section>
+
+        <section class="card signup-card" aria-label="Sign up form">
+          <h2>Create account</h2>
+
+          <form>
+            <div class="field">
+              <input type="text" placeholder="Full name" />
+            </div>
+            <div class="field">
+              <input type="email" placeholder="Work email" />
+            </div>
+            <div class="field">
+              <input type="password" placeholder="Password" />
+            </div>
+            <button class="button-block" type="submit">Create account</button>
+          </form>
+        </section>
+
+        <aside class="booking-card" aria-label="Product image">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="" />
+          <div class="booking-copy">
+            <h3>Launch board</h3>
+            <p>Track decisions, owners, and deadlines from kickoff to rollout.</p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="modal-backdrop">
+      <div class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="false">
+        <button class="modal-close" aria-label="Close signup help" type="button">×</button>
+        <h3 id="modal-title">Need a quick walkthrough?</h3>
+        <p>We can show you the setup flow in ten minutes and help your team get started without adding more process.</p>
+        <div class="modal-actions">
+          <button class="ghost-btn" type="button">Maybe later</button>
+          <button class="primary-btn" type="button">Schedule</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const trigger = document.getElementById('open-modal');
+      const modal = document.getElementById('modal-backdrop');
+      const closeButton = modal.querySelector('.modal-close');
+      const focusables = Array.from(modal.querySelectorAll('button'));
+
+      function openModal() {
+        modal.classList.add('open');
+        closeButton.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        trigger.focus();
+      }
+
+      trigger.addEventListener('click', openModal);
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (!modal.classList.contains('open')) return;
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeModal();
+          return;
+        }
+
+        if (event.key === 'Tab') {
+          event.preventDefault();
+          const currentIndex = focusables.indexOf(document.activeElement);
+          const nextIndex = currentIndex === focusables.length - 1 ? 0 : currentIndex + 1;
+          focusables[nextIndex].focus();
+        }
+      });
+    </script>
+  </body>
+</html>
