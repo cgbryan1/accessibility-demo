@@ -13,7 +13,6 @@ Use any of the following from the repo root:
 
 1. Python static server
 
-   cd into accessibility-demo
    ```bash
    python3 -m http.server 8000
    ```
@@ -23,14 +22,12 @@ Use any of the following from the repo root:
 
 3. Node static server
 
-   cd into accessibility-demo
    ```bash
    npx serve . -l 8000
    ```
 
 5. Lightweight HTTP server via npm
 
-   cd into accessibility-demo
    ```bash
    npx http-server . -p 8000
    ```
