@@ -10,34 +10,6 @@ Check out the [posiitve example](https://accessibility-demo-mu.vercel.app/good.h
 - `good.html` — accessible version with the same layout and styling
 - `index.html` - automatically redirects to `good.html` for deployment purposes
 
-## Local deployment strategies
-
-Use any of the following from the repo root:
-
-1. Python static server
-
-   ```bash
-   python3 -m http.server 8000
-   ```
-   Open:
-   - `http://localhost:8000/bad.html`
-   - `http://localhost:8000/good.html`
-
-3. Node static server
-
-   ```bash
-   npx serve . -l 8000
-   ```
-
-5. Lightweight HTTP server via npm
-
-   ```bash
-   npx http-server . -p 8000
-   ```
-
-7. VS Code / browser preview
-   - Open the HTML files directly in a browser, or
-   - Use the Live Server extension in VS Code to serve the folder.
 
 ## Suggested walkthrough
 
@@ -101,3 +73,33 @@ This demo focuses on the kinds of failures that often map to WCAG 2.1 success cr
 - 4.1.2 Name, Role, Value
 - 2.4.3 Focus Order
 - 2.4.11 Focus Not Obscured
+
+
+## Local deployment strategies
+
+Use any of the following from the repo root:
+
+1. Python static server
+
+   ```bash
+   python3 -m http.server 8000
+   ```
+   Open:
+   - `http://localhost:8000/bad.html`
+   - `http://localhost:8000/good.html`
+
+3. Node static server
+
+   ```bash
+   npx serve . -l 8000
+   ```
+
+5. Lightweight HTTP server via npm
+
+   ```bash
+   npx http-server . -p 8000
+   ```
+
+7. VS Code / browser preview
+   - Open the HTML files directly in a browser, or
+   - Use the Live Server extension in VS Code to serve the folder.
