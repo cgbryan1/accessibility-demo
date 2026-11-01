@@ -12,27 +12,30 @@ This repo contains a deliberately bad and a deliberately good version of the sam
 Use any of the following from the repo root:
 
 1. Python static server
+
+   cd into accessibility-demo
    ```bash
-   cd /Users/carolinebryan/code/accessibility-demo
    python3 -m http.server 8000
    ```
    Open:
    - `http://localhost:8000/bad.html`
    - `http://localhost:8000/good.html`
 
-2. Node static server
+3. Node static server
+
+   cd into accessibility-demo
    ```bash
-   cd /Users/carolinebryan/code/accessibility-demo
    npx serve . -l 8000
    ```
 
-3. Lightweight HTTP server via npm
+5. Lightweight HTTP server via npm
+
+   cd into accessibility-demo
    ```bash
-   cd /Users/carolinebryan/code/accessibility-demo
    npx http-server . -p 8000
    ```
 
-4. VS Code / browser preview
+7. VS Code / browser preview
    - Open the HTML files directly in a browser, or
    - Use the Live Server extension in VS Code to serve the folder.
 
