@@ -371,26 +371,26 @@
   </head>
   <body>
     <div class="frame">
-      <header class="topbar" aria-label="Header">
+      <div class="topbar" aria-label="Header">
         <div class="brand">
           <div class="brand-mark">S</div>
           <span>Skyline</span>
         </div>
 
-        <nav class="main-nav" aria-label="Main navigation">
-          <div class="nav-item">Features</div>
-          <div class="nav-item">Pricing</div>
-          <div class="nav-item">Resources</div>
-        </nav>
+        <div class="main-nav" aria-label="Main navigation">
+          <div class="nav-item" tabindex="0">Features</div>
+          <div class="nav-item" tabindex="0">Pricing</div>
+          <div class="nav-item" tabindex="0">Resources</div>
+        </div>
 
         <div class="nav-actions">
-          <div class="chip">Log in</div>
-          <div class="chip primary" id="open-modal">Book demo</div>
+          <div class="chip" tabindex="0">Log in</div>
+          <div class="chip primary" tabindex="0" id="open-modal">Book demo</div>
         </div>
-      </header>
+      </div>
 
-      <main class="hero">
-        <section class="intro">
+      <div class="hero">
+        <div class="intro">
           <span class="eyebrow">Team productivity</span>
           <h1>Build your next launch in one place.</h1>
           <p>Keep plans, assets, and stakeholder feedback aligned without the spreadsheet chaos.</p>
@@ -405,9 +405,9 @@
             <strong>2.3x</strong>
             <span>faster campaign coordination</span>
           </div>
-        </section>
+        </div>
 
-        <section class="card signup-card" aria-label="Sign up form">
+        <div class="card signup-card" aria-label="Sign up form">
           <h2>Create account</h2>
 
           <form>
@@ -420,58 +420,73 @@
             <div class="field">
               <input type="password" placeholder="Password" />
             </div>
-            <button class="button-block" type="submit">Create account</button>
+            <div class="button-block" tabindex="0" aria-label="Create account">Create account</div>
           </form>
-        </section>
+        </div>
 
-        <aside class="booking-card" aria-label="Product image">
+        <div class="booking-card" aria-label="Product image">
           <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="" />
           <div class="booking-copy">
             <h3>Launch board</h3>
             <p>Track decisions, owners, and deadlines from kickoff to rollout.</p>
           </div>
-        </aside>
-      </main>
+        </div>
+      </div>
     </div>
 
-    <div class="modal-backdrop" id="modal-backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="false">
-        <button class="modal-close" aria-label="Close signup help" type="button">×</button>
+    <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
+      <div class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <div class="modal-close" tabindex="0" aria-label="Close signup help">×</div>
         <h3 id="modal-title">Need a quick walkthrough?</h3>
         <p>We can show you the setup flow in ten minutes and help your team get started without adding more process.</p>
         <div class="modal-actions">
-          <button class="ghost-btn" type="button">Maybe later</button>
-          <button class="primary-btn" type="button">Schedule</button>
+          <div class="ghost-btn" tabindex="0">Maybe later</div>
+          <div class="primary-btn" tabindex="0">Schedule</div>
         </div>
       </div>
     </div>
 
     <script>
       const trigger = document.getElementById('open-modal');
-      const modal = document.getElementById('modal-backdrop');
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const modal = modalBackdrop.querySelector('.modal');
       const closeButton = modal.querySelector('.modal-close');
-      const focusables = Array.from(modal.querySelectorAll('button'));
+      const modalButtons = Array.from(modal.querySelectorAll('.ghost-btn, .primary-btn, .modal-close'));
 
       function openModal() {
-        modal.classList.add('open');
+        modalBackdrop.classList.add('open');
+        modalBackdrop.setAttribute('aria-hidden', 'false');
         closeButton.focus();
       }
 
       function closeModal() {
-        modal.classList.remove('open');
+        modalBackdrop.classList.remove('open');
+        modalBackdrop.setAttribute('aria-hidden', 'true');
         trigger.focus();
+      }
+
+      function handleKeyActivation(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          event.currentTarget.click();
+        }
       }
 
       trigger.addEventListener('click', openModal);
       closeButton.addEventListener('click', closeModal);
-      modal.addEventListener('click', function (event) {
-        if (event.target === modal) {
+      modalBackdrop.addEventListener('click', function (event) {
+        if (event.target === modalBackdrop) {
           closeModal();
         }
       });
 
+      [trigger, closeButton, modal.querySelector('.ghost-btn'), modal.querySelector('.primary-btn')].forEach(function (element) {
+        element.addEventListener('keydown', handleKeyActivation);
+      });
+
       document.addEventListener('keydown', function (event) {
-        if (!modal.classList.contains('open')) return;
+        if (!modalBackdrop.classList.contains('open')) return;
+
         if (event.key === 'Escape') {
           event.preventDefault();
           closeModal();
@@ -479,10 +494,11 @@
         }
 
         if (event.key === 'Tab') {
+          const active = document.activeElement;
+          const currentIndex = modalButtons.indexOf(active);
+          const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % modalButtons.length;
+          modalButtons[nextIndex].focus();
           event.preventDefault();
-          const currentIndex = focusables.indexOf(document.activeElement);
-          const nextIndex = currentIndex === focusables.length - 1 ? 0 : currentIndex + 1;
-          focusables[nextIndex].focus();
         }
       });
     </script>
