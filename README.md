@@ -2,7 +2,7 @@
 
 This repo contains a deliberately bad and a deliberately good version of the same sign-up page. The goal is to show how nearly identical visual design can still create very different keyboard and assistive-technology experiences.
 
-Check out the [positive example](https://accessibility-demo-mu.vercel.app/good.html) and the [negative example](https://accessibility-demo-mu.vercel.app/bad.html) online. Or, fork and deploy locally to explore accessibility hands-on.
+Fork and deploy locally to explore accessibility hands-on.
 
 ## Files
 
@@ -50,12 +50,7 @@ Look for examples such as:
 
 Run Lighthouse and axe on both pages.
 
-Typical result:
-
-- bad version: roughly 40-60
-- good version: roughly 90-100
-
-The score gap is dramatic, but automated tools are not the whole story. They do not always catch:
+Contrast the high scores with the accessibility violations you found manually. Automated tools are not the whole story. They do not always catch:
 
 - whether the tab order is intuitive
 - whether focus styles are visible to the sighted keyboard user
