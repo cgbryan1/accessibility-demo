@@ -2,7 +2,7 @@
 
 This repo contains a deliberately bad and a deliberately good version of the same sign-up page. The goal is to show how nearly identical visual design can still create very different keyboard and assistive-technology experiences.
 
-Check out the [posiitve example](https://accessibility-demo-mu.vercel.app/good.html) and the [negative example](https://accessibility-demo-mu.vercel.app/bad.html) online. Or, fork and deploy locally to explore accessibility hands-on.
+Check out the [positive example](https://accessibility-demo-mu.vercel.app/good.html) and the [negative example](https://accessibility-demo-mu.vercel.app/bad.html) online. Or, fork and deploy locally to explore accessibility hands-on.
 
 ## Files
 
